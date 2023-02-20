@@ -15,6 +15,7 @@
 		6C8D39A429A424C200FF5747 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C8D39A329A424C200FF5747 /* PlayerView.swift */; };
 		6C8D39A629A4284500FF5747 /* PlaybackControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C8D39A529A4284500FF5747 /* PlaybackControlButton.swift */; };
 		6C8D39A829A42C5600FF5747 /* MeditationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C8D39A729A42C5600FF5747 /* MeditationViewModel.swift */; };
+		6C8D39AA29A4388100FF5747 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C8D39A929A4388100FF5747 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		6C8D39A329A424C200FF5747 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		6C8D39A529A4284500FF5747 /* PlaybackControlButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackControlButton.swift; sourceTree = "<group>"; };
 		6C8D39A729A42C5600FF5747 /* MeditationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationViewModel.swift; sourceTree = "<group>"; };
+		6C8D39A929A4388100FF5747 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				6C8D39A329A424C200FF5747 /* PlayerView.swift */,
 				6C8D39A529A4284500FF5747 /* PlaybackControlButton.swift */,
 				6C8D39A729A42C5600FF5747 /* MeditationViewModel.swift */,
+				6C8D39A929A4388100FF5747 /* Extensions.swift */,
 			);
 			path = Meditation;
 			sourceTree = "<group>";
@@ -155,6 +158,7 @@
 				6C8D399429A404E200FF5747 /* MeditationApp.swift in Sources */,
 				6C8D39A829A42C5600FF5747 /* MeditationViewModel.swift in Sources */,
 				6C8D39A429A424C200FF5747 /* PlayerView.swift in Sources */,
+				6C8D39AA29A4388100FF5747 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
