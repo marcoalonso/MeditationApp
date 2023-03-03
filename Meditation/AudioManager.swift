@@ -13,6 +13,12 @@ final class AudioManager: ObservableObject {
 //    static let shared = AudioManager()
     var player: AVAudioPlayer?
     
+    @Published private(set) var isPlaying: Bool = false {
+        didSet {
+            print("isPlaying", isPlaying)
+        }
+    }
+    
     func startPlayer(track: String, isPreview: Bool = false) {
         guard let url = Bundle.main.url(forResource: track, withExtension: "mp3") else { return }
         
@@ -25,9 +31,25 @@ final class AudioManager: ObservableObject {
                 player?.prepareToPlay()
             } else {
                 player?.play()
+                isPlaying = true
             }
         } catch {
             print("Debug: error \(error.localizedDescription)")
+        }
+    }
+    
+    func playPause(){
+        guard let player = player else {
+            print("Instance of audio player not found!")
+            return
+        }
+        
+        if player.isPlaying {
+            player.pause()
+            isPlaying = false
+        } else {
+            player.play()
+            isPlaying = true
         }
     }
 }

@@ -64,7 +64,7 @@ struct PlayerView: View {
                         Slider(value: $value, in: 0...player.duration) { editing in
                             
                             isEditing = editing
-                            
+                            print(editing)
                             if !editing {
                                 player.currentTime = value
                             }
@@ -73,9 +73,9 @@ struct PlayerView: View {
                         
                         //MARK: Playback Time
                         HStack {
-                            Text("0:00")
+                            Text(DateComponentsFormatter.postitional.string(from: player.currentTime) ?? "0:00")
                             Spacer()
-                            Text("1:00")
+                            Text(DateComponentsFormatter.postitional.string(from: player.duration - player.currentTime) ?? "0:00")
                         }
                         .font(.caption)
                         .foregroundColor(.white)
@@ -98,8 +98,8 @@ struct PlayerView: View {
                         Spacer()
                         
                         //MARK: Play/Pause Button
-                        PlaybackControlButton(systemName: "play.circle.fill", fontSize: 44) {
-                            
+                        PlaybackControlButton(systemName: audioManager.isPlaying ? "pause.circle.fill" : "play.circle.fill", fontSize: 44) {
+                            audioManager.playPause()
                         }
                         
                         Spacer()
