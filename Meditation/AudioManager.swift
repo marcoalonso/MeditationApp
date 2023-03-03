@@ -8,18 +8,24 @@
 import Foundation
 import AVKit
 
-final class AudioManager {
+final class AudioManager: ObservableObject {
     ///Only one instance of the class and to be access by any component of the class
-    static let shared = AudioManager()
+//    static let shared = AudioManager()
     var player: AVAudioPlayer?
     
-    func startPlayer(track: String) {
+    func startPlayer(track: String, isPreview: Bool = false) {
         guard let url = Bundle.main.url(forResource: track, withExtension: "mp3") else { return }
         
         do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
             player = try AVAudioPlayer(contentsOf: url)
             
-            player?.play()
+            if isPreview {
+                player?.prepareToPlay()
+            } else {
+                player?.play()
+            }
         } catch {
             print("Debug: error \(error.localizedDescription)")
         }
