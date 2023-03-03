@@ -12,6 +12,8 @@ struct PlayerView: View {
     var meditationVM: MeditationViewModel
     var isPreview: Bool = false
     @State private var value: Double = 0.0
+    @State private var isEditing : Bool = false
+    
     @Environment(\.dismiss) var dismiss
     
     let timer = Timer
@@ -55,68 +57,74 @@ struct PlayerView: View {
                 Spacer()
                 
                 if let player = audioManager.player {
-                
-                VStack(spacing: 5){
-                    //MARK: Playback Timeline
                     
-                    Slider(value: $value, in: 0...player.duration)
+                    VStack(spacing: 5){
+                        //MARK: Playback Timeline
+                        
+                        Slider(value: $value, in: 0...player.duration) { editing in
+                            
+                            isEditing = editing
+                            
+                            if !editing {
+                                player.currentTime = value
+                            }
+                        }
                         .accentColor(.white)
+                        
+                        //MARK: Playback Time
+                        HStack {
+                            Text("0:00")
+                            Spacer()
+                            Text("1:00")
+                        }
+                        .font(.caption)
+                        .foregroundColor(.white)
+                    }
                     
-                    //MARK: Playback Time
+                    //MARK: Playback Controls
                     HStack {
-                        Text("0:00")
+                        //MARK: Repeat Button
+                        PlaybackControlButton(systemName: "repeat") {
+                            
+                        }
+                        
                         Spacer()
-                        Text("1:00")
-                    }
-                    .font(.caption)
-                    .foregroundColor(.white)
-                }
-                
-                //MARK: Playback Controls
-                HStack {
-                    //MARK: Repeat Button
-                    PlaybackControlButton(systemName: "repeat") {
                         
-                    }
-                    
-                    Spacer()
-                    
-                    //MARK: Backward Button
-                    PlaybackControlButton(systemName: "gobackward.10") {
+                        //MARK: Backward Button
+                        PlaybackControlButton(systemName: "gobackward.10") {
+                            
+                        }
                         
-                    }
-                    
-                    Spacer()
-                    
-                    //MARK: Play/Pause Button
-                    PlaybackControlButton(systemName: "play.circle.fill", fontSize: 44) {
+                        Spacer()
                         
-                    }
-                    
-                    Spacer()
-                    
-                    //MARK: Forward Button
-                    PlaybackControlButton(systemName: "goforward.10") {
+                        //MARK: Play/Pause Button
+                        PlaybackControlButton(systemName: "play.circle.fill", fontSize: 44) {
+                            
+                        }
                         
-                    }
-                    
-                    Spacer()
-                    
-                    //MARK: Stop Button
-                    PlaybackControlButton(systemName: "stop.fill") {
+                        Spacer()
                         
+                        //MARK: Forward Button
+                        PlaybackControlButton(systemName: "goforward.10") {
+                            
+                        }
+                        
+                        Spacer()
+                        
+                        //MARK: Stop Button
+                        PlaybackControlButton(systemName: "stop.fill") {
+                            
+                        }
                     }
-                }
                 }
             }
             .padding(20)
         }
         .onAppear {
-//            AudioManager.shared.startPlayer(track: meditationVM.meditation.track, isPreview: isPreview)
             audioManager.startPlayer(track: meditationVM.meditation.track, isPreview: isPreview)
         }
         .onReceive(timer) { _ in
-            guard let player = audioManager.player else { return }
+            guard let player = audioManager.player, !isEditing else { return }
             value = player.currentTime
         }
     }
